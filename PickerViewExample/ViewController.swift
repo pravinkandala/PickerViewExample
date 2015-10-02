@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,27 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var outputLabel: UILabel!
+    
+    let names = ["NewYork", "Mascow", "Houston", "Chicago", "Bangalore", "Los Angeles"]
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
 
-
+    func pickerView(_pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return names.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return names[row]
+    
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+        outputLabel.text = names[row]
+        
+    }
 }
 
