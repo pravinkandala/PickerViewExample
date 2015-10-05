@@ -8,60 +8,35 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
         
-        origin = names[0][pickerView.selectedRowInComponent(0)]
-        destination = names[1][pickerView.selectedRowInComponent(1)]
         updateUI()
-    }
+         }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var outputLabel: UILabel!
-    
-    var origin = ""
-    var destination = ""
-    
-    let names = [["New York", "Mascow", "Houston", "Chicago", "Bangalore", "Los Angeles"],["New York", "Detroit", "Houston", "Chicago", "San Francisco", "Los Angeles"]]
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return names.count
-    }
-    
     func updateUI(){
-        outputLabel.text = "Flight from \(origin) to \(destination)"
+           outputLabel.text = dateFormatter.stringFromDate(datePicker.date)
     }
     
+    @IBOutlet weak var datePicker: UIDatePicker!
+
+    @IBOutlet weak var outputLabel: UILabel!
+ 
+    var dateFormatter = NSDateFormatter()
     
-    func pickerView(_pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return names[component].count
-    }
     
     
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return names [component][row]
-    
-    }
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
-        if(component==0)
-        {
-            origin = names[component][row]
-        } else {
-            
-         destination = names[component][row]
-        }
-     //  outputLabel.text = names [component][row]
+    @IBAction func dateChanged(sender:UIDatePicker){
         updateUI()
-        
     }
 }
-
