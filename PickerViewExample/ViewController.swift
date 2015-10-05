@@ -23,7 +23,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var outputLabel: UILabel!
     
-    let names = ["NewYork", "Mascow", "Houston", "Chicago", "Bangalore", "Los Angeles"]
+    let names = ["New York", "Mascow", "Houston", "Chicago", "Bangalore", "Los Angeles"]
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
